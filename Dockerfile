@@ -15,7 +15,7 @@ RUN \
   mkdir /etc/ddclient && \
   mkdir -p /var/cache/ddclient
 
-# Use ddclient
-CMD ["/usr/sbin/ddclient","-daemon=60","-debug","-verbose","-noquiet","-foreground"]
+COPY ddclient.conf /etc/ddclient/ddclient.conf
 
-ONBUILD ADD ddclient.conf /etc/ddclient/ddclient.conf
+# Use ddclient
+CMD ["/usr/sbin/ddclient","-foreground"]
