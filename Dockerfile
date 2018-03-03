@@ -12,4 +12,4 @@ RUN apt-get update \
 COPY ddclient.conf /etc/ddclient.conf
 
 # Use ddclient
-CMD ["ddclient","-foreground"]
+CMD ["/usr/sbin/ddclient","-foreground"]
