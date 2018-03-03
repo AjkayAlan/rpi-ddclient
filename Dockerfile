@@ -1,19 +1,13 @@
-FROM resin/rpi-raspbian:jessie-20160831
-MAINTAINER github.com/AjkayAlan
+FROM resin/rpi-raspbian:stretch
+LABEL maintainer="github.com/AjkayAlan"
 
 USER root
 
 # Install ddclient
-RUN \
-  apt-get update -q && \
-  apt-get install -qy ca-certificates wget libio-socket-ip-perl libio-socket-ssl-perl libjson-any-perl && \
-  apt-get clean -y && \
-  wget "http://downloads.sourceforge.net/project/ddclient/ddclient/ddclient-3.8.3/ddclient-3.8.3.tar.gz?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fddclient%2Ffiles%2Fddclient%2Fddclient-3.8.3%2F&ts=1464485224&use_mirror=heanet" -O ddclient-3.8.3.tar.gz && \
-  tar -xzf ddclient-3.8.3.tar.gz && \
-  cd ddclient-3.8.3 && \
-  cp ddclient /usr/sbin/ && \
-  mkdir /etc/ddclient && \
-  mkdir -p /var/cache/ddclient
+RUN apt-get update \
+    && apt-get install -y ddclient \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY ddclient.conf /etc/ddclient/ddclient.conf
 
